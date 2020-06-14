@@ -46,6 +46,35 @@
 <link rel="alternate stylesheet" type="text/css" href="css/colors/green.css" title="color4" />
 
 <link rel="alternate stylesheet" type="text/css" href="css/colors/darkgreen.css" title="color5" />
+    <style>
+        .pagination a{
+          
+            cursor: pointer;
+    background-color: #eee;
+    margin: 6px 2px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+            
+        }
+        .single-item{
+            margin-bottom: 50px;
+        }
+        .pagination{
+            margin: 15px 0px;
+            justify-content: center;
+         display: flex;
+    flex-basis: 100%;
+    width: 100%;
+                padding: 0 15px;
+        }
+        .page.current{
+            background-color: #f0283b;
+    color: #fff;
+        }
+    </style>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-168753733-1"></script>
 <script>
@@ -242,8 +271,12 @@
 		<div class="container">
 
 			<div class="row">
-
-				<div class="col-md-12 column">
+                <div class="cont">
+<div class="item-content">
+    
+    
+    
+				<div class="col-md-12 column single-item">
 
 					<div class="single-page">
 
@@ -269,7 +302,41 @@
 
 
 				</div>
+    
+    
+				<div class="col-md-12 column single-item">
 
+					<div class="single-page">
+
+						<img src="images/resource/sermon-single.jpg" alt="" />
+
+						<h2>மணியார் ஆரோக்கியம் </h2>
+
+						
+
+					</div><!-- SERMON SINGLE -->
+
+					
+
+					<p>இவர் இரவில் வீட்டை விட்டு வெளியே வந்தபோது கோவில் வீதியில் வெண்குதிரையில் பளிச்சென்று சந்தியாகப்பர் தோன்றினார்.
+
+அகஸ்தீன் - இவர் மில் வேளைக்குச் சென்று இரவில் வீடு திரும்பும்போது 2 மணியளவில் மூன்று பேய்கள் இவரை வழிமறித்து நின்றது. அப்பொழுது இவர் மனம் உருகி சந்தியாகப்பரே நீரே எனக்குத் துணை! நீர் வரவில்லை என்றால் நான் செத்தேன் என்று சொன்னார். நமது பழைய ஆலயத்தின் கோபுரத்தில் பளிச்சென்று மின்னல் போல் சந்தியாகப்பர் கிளம்பி வந்து பேய்களை சாட்டையால் அடித்து விரட்டினார்.(நேரில் நடைபெற்ற சம்பவம் ).
+
+மறவபட்டி (உலகம்பட்டியார் தோட்டம்) பாலு என்ற ராயப்பன் - இவர் மறவப்பட்டி கோவிலில் புனிதர்களின் சுரூபத்திற்கு பெயிண்ட் அடித்துக் கொண்டிருக்கும் போது வேடிக்கை பார்த்துக்கொண்டு தூங்கிவிட்டார். இவர் நள்ளிரவில் விழித்து வீடு திரும்பும் வழியில் பேய்கள் இவரை வழிமறித்தது. அப்போது இவர் சந்தியாகப்பரே இப்பொழுது தானே உம்மிடம் இருந்து வந்தேன். என்னை பேய்கள் வழிமறித்ததுக் கொண்டதே! நீரே என்னைக் காப்பாற்ற வேண்டும் என்று கத்தியவுடன் கோவிலின் கோபுரத்திலிருந்து ஒரு ஒளி வருவதைக் கண்டார். வெள்ளைக் குதிரையில் சந்தியாகப்பர் நேரில் வந்து பேய்களை அடித்து விரட்டி இவரைக் காப்பாற்றினர். </p>
+
+								
+
+
+
+
+				</div>
+    
+    
+                </div>
+                   
+                    
+                </div>
+             
 			</div>
 
 		</div>
@@ -446,7 +513,128 @@
 
 
     </script>
+<script>
+    (function($) {
+	var pagify = {
+		items: {},
+		container: null,
+		totalPages: 1,
+		perPage: 3,
+		currentPage: 0,
+		createNavigation: function() {
+			this.totalPages = Math.ceil(this.items.length / this.perPage);
 
+			$('.pagination', this.container.parent()).remove();
+			var pagination = $('<div class="pagination"></div>').append('<a class="nav prev disabled" data-next="false"><</a>');
+
+			for (var i = 0; i < this.totalPages; i++) {
+				var pageElClass = "page";
+				if (!i)
+					pageElClass = "page current";
+				var pageEl = '<a class="' + pageElClass + '" data-page="' + (
+				i + 1) + '">' + (
+				i + 1) + "</a>";
+				pagination.append(pageEl);
+			}
+			pagination.append('<a class="nav next" data-next="true">></a>');
+
+			this.container.after(pagination);
+
+			var that = this;
+			$("body").off("click", ".nav");
+			this.navigator = $("body").on("click", ".nav", function() {
+				var el = $(this);
+				that.navigate(el.data("next"));
+			});
+
+			$("body").off("click", ".page");
+			this.pageNavigator = $("body").on("click", ".page", function() {
+				var el = $(this);
+				that.goToPage(el.data("page"));
+			});
+		},
+		navigate: function(next) {
+			// default perPage to 5
+			if (isNaN(next) || next === undefined) {
+				next = true;
+			}
+			$(".pagination .nav").removeClass("disabled");
+			if (next) {
+				this.currentPage++;
+				if (this.currentPage > (this.totalPages - 1))
+					this.currentPage = (this.totalPages - 1);
+				if (this.currentPage == (this.totalPages - 1))
+					$(".pagination .nav.next").addClass("disabled");
+				}
+			else {
+				this.currentPage--;
+				if (this.currentPage < 0)
+					this.currentPage = 0;
+				if (this.currentPage == 0)
+					$(".pagination .nav.prev").addClass("disabled");
+				}
+
+			this.showItems();
+		},
+		updateNavigation: function() {
+
+			var pages = $(".pagination .page");
+			pages.removeClass("current");
+			$('.pagination .page[data-page="' + (
+			this.currentPage + 1) + '"]').addClass("current");
+		},
+		goToPage: function(page) {
+
+			this.currentPage = page - 1;
+
+			$(".pagination .nav").removeClass("disabled");
+			if (this.currentPage == (this.totalPages - 1))
+				$(".pagination .nav.next").addClass("disabled");
+
+			if (this.currentPage == 0)
+				$(".pagination .nav.prev").addClass("disabled");
+			this.showItems();
+		},
+		showItems: function() {
+			this.items.hide();
+			var base = this.perPage * this.currentPage;
+			this.items.slice(base, base + this.perPage).show();
+
+			this.updateNavigation();
+		},
+		init: function(container, items, perPage) {
+			this.container = container;
+			this.currentPage = 0;
+			this.totalPages = 1;
+			this.perPage = perPage;
+			this.items = items;
+			this.createNavigation();
+			this.showItems();
+		}
+	};
+
+	// stuff it all into a jQuery method!
+	$.fn.pagify = function(perPage, itemSelector) {
+		var el = $(this);
+		var items = $(itemSelector, el);
+
+		// default perPage to 5
+		if (isNaN(perPage) || perPage === undefined) {
+			perPage = 3;
+		}
+
+		// don't fire if fewer items than perPage
+		if (items.length <= perPage) {
+			return true;
+		}
+
+		pagify.init(el, items, perPage);
+	};
+})(jQuery);
+
+$(".item-content").pagify(1, ".single-item");
+
+    </script>
 
 
 
