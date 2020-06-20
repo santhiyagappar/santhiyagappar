@@ -425,7 +425,9 @@ $(xml).find("Post").each(function () {
 	</script>
 	<script>
         // A $( document ).ready() block.
-$( document ).ready(function($) {
+$( document ).ready(function() {
+    
+		(function($) {
 			var pagify = {
 				items: {},
 				container: null,
@@ -544,5 +546,6 @@ $( document ).ready(function($) {
 		})(jQuery);
 		
 		$(".item-content").pagify(6, ".single-item");
+    });
 	</script>
 </body>s
