@@ -382,6 +382,9 @@ header{display:none}
 
 
 @media (max-width:767px){
+    .responsive-header .headercounter{
+        text-align: center;
+    }
     .responsive-logo a img{
             max-width: 245px;
     }
