@@ -63,6 +63,30 @@
 		
 		  gtag('config', 'UA-168753733-1');
 	</script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+$.ajax({
+    type: "GET",
+    url: "assets/post.xml",
+    dataType: "xml",
+    success: xmlParser
+   });
+});
+
+function xmlParser(xml) {
+
+$('#load').fadeOut();
+
+$(xml).find("Post").each(function () {
+
+    $(".item-content").append(' <div class="col-md-12 column single-item"><div class="single-page"><h2>' + $(this).find("Title").text() + '</h2></div><p>' + $(this).find("Description").text() + '</p></div>');
+    $(".Post").fadeIn(1000);
+
+ });
+
+}
+    
+    </script>
 </head>
 
 <body>
@@ -377,30 +401,7 @@
     
          
          
-    <script type="text/javascript">
-    $(document).ready(function () {
-$.ajax({
-    type: "GET",
-    url: "assets/post.xml",
-    dataType: "xml",
-    success: xmlParser
-   });
-});
-
-function xmlParser(xml) {
-
-$('#load').fadeOut();
-
-$(xml).find("Post").each(function () {
-
-    $(".item-content").append(' <div class="col-md-12 column single-item"><div class="single-page"><h2>' + $(this).find("Title").text() + '</h2></div><p>' + $(this).find("Description").text() + '</p></div>');
-    $(".Post").fadeIn(1000);
-
- });
-
-}
     
-    </script>
 	<script type="text/javascript">
 		$(window).load(function(){
 
