@@ -4341,7 +4341,7 @@ acronym{ border-bottom:1px dotted #ccc; }
     width:100%;
 }
 .single-page h2{
-  
+  font-weight: bold;
     font-size:18px;
     line-height:30px;
     padding:10px 20px;
